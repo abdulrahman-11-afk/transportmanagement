@@ -15,13 +15,11 @@ export default function AboutUsSection() {
           />
         </div>
 
-        <div className="w-full lg:w-1/2 flex flex-col gap-6">
-          <div className="text-4xl sm:text-5xl font-bold text-gray-900  text-center">
-
-              About us
-        
+        <div className="w-full lg:w-1/2 flex flex-col gap-4">
+          <div className="text-4xl sm:text-5xl font-bold text-gray-900">
+              About <span className="text-blue-600">us</span>
           </div>
-          <h2 className="ttext-gray-700 text-lg max-w-xl mx-auto leading-relaxed">
+          <h2 className="text-gray-700 text-lg max-w-xl">
             Connecting People, One Trip at a Time
           </h2>
 
@@ -37,7 +35,7 @@ export default function AboutUsSection() {
             With verified drivers and premium vehicles, your journey is in safe hands.
           </p>
 
-          <div className="flex text-center justify-center gap-6 mt-4">
+          <div className="flex text-center  gap-6 mt-4">
             <div className="flex flex-col">
               <span className="text-blue-600 font-bold text-2xl">99.2%</span>
               <span className="text-gray-600 text-sm">On-time Arrival</span>

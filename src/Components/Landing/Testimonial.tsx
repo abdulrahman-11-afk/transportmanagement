@@ -29,7 +29,7 @@ export default function TestimonialsSection() {
     <section id="testimonials" className="py-24 px-6 bg-gray-50">
       <div className="max-w-7xl mx-auto text-center mb-16">
         <h2 className="text-4xl font-bold text-gray-900 mb-4">
-          What Our Users Say
+          What Our Users <span className="text-blue-600">Say</span>
         </h2>
         <p className="text-gray-700 text-lg max-w-xl mx-auto leading-relaxed">
           Real feedback from passengers who trust Transport for their journeys.

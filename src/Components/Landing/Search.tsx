@@ -13,7 +13,7 @@ export default function SearchForm() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const isLoggedIn = false;
+    const isLoggedIn = localStorage.getItem("user");
 
     if (!isLoggedIn) {
       localStorage.setItem(
@@ -24,28 +24,30 @@ export default function SearchForm() {
       return;
     }
 
-    const resultsSection = document.getElementById("results");
-    resultsSection?.scrollIntoView({ behavior: "smooth" });
+    window.location.href = `/trips?from=${from}&to=${to}`;
   };
 
   return (
     <section className="flex flex-col items-center gap-8 max-w-6xl mt-30 mx-auto px-6">
-
+      
+      {/* Header */}
       <div className="text-center">
         <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-          Book Your Journey
+          Book Your <span className="text-blue-600">Journey</span>
         </h2>
         <p className="text-gray-700 text-lg max-w-xl mx-auto leading-relaxed">
           Select from available buses or cars that fit your schedule.
         </p>
       </div>
+
+      {/* Form */}
       <form
         onSubmit={handleSearch}
-        className="bg-white rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.15)]  p-6 md:p-8 flex flex-col gap-6 w-full"
+        className="bg-white rounded-2xl border border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-6 md:p-8 flex flex-col gap-6 w-full"
       >
-
-        <div className="flex flex-col md:flex-row gap-4">
-
+        <div className="flex flex-col md:flex-row gap-4 items-end">
+          
+          {/* From */}
           <div className="w-full flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700 flex items-center gap-1">
               <IoLocationOutline /> From
@@ -57,14 +59,31 @@ export default function SearchForm() {
               required
             >
               <option value="">Select location</option>
-              {locations.map((loc) => (
-                <option key={loc} value={loc}>
-                  {loc}
-                </option>
-              ))}
+              {locations
+                .filter((loc) => loc !== to)
+                .map((loc) => (
+                  <option key={loc} value={loc}>
+                    {loc}
+                  </option>
+                ))}
             </select>
           </div>
 
+          {/* Swap Button */}
+          <div className="hidden md:flex">
+            <button
+              type="button"
+              onClick={() => {
+                setFrom(to);
+                setTo(from);
+              }}
+              className="w-12 h-12 border border-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-100 transition"
+            >
+              ⇄
+            </button>
+          </div>
+
+          {/* To */}
           <div className="w-full flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700 flex items-center gap-1">
               <IoLocationOutline /> To
@@ -76,14 +95,17 @@ export default function SearchForm() {
               required
             >
               <option value="">Select location</option>
-              {locations.map((loc) => (
-                <option key={loc} value={loc}>
-                  {loc}
-                </option>
-              ))}
+              {locations
+                .filter((loc) => loc !== from)
+                .map((loc) => (
+                  <option key={loc} value={loc}>
+                    {loc}
+                  </option>
+                ))}
             </select>
           </div>
 
+          {/* Date */}
           <div className="w-full flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">
               Travel Date
@@ -97,6 +119,7 @@ export default function SearchForm() {
             />
           </div>
 
+          {/* Passengers */}
           <div className="w-full flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">
               Passengers
@@ -117,6 +140,7 @@ export default function SearchForm() {
           </div>
         </div>
 
+        {/* Button */}
         <button
           type="submit"
           className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:scale-[1.02] transition duration-300 shadow-md"
