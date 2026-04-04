@@ -4,7 +4,7 @@ export default function Navbar() {
     return (
             <header className="flex items-center fixed z-50 top-0 bg-white w-full left-0 justify-between px-20 h-20 "> 
                 <h2 className="cursor-pointer text-xl">Transport</h2>
-                 <ul className="flex items-center justify-center gap-10 ml-16 cursor-pointer ">
+                 <ul className="flex items-center text-[14px] justify-center gap-6 ml-16 cursor-pointer ">
                     <li className="hover:text-[#1E3A8A]">Home</li>
                     <li className="hover:text-[#1E3A8A]">Why Choose Us</li>
                     <li className="hover:text-[#1E3A8A]">About Us</li>

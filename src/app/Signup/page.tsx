@@ -1,94 +1,167 @@
 "use client";
 
-import { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { useState, FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function SignupPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [role, setRole] = useState<"driver" | "passenger" | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(true);
 
-  const handleSignup = (e: React.FormEvent) => {
+  const router = useRouter();
+
+  const handleSignup = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log({ name, email, password });
+    if (!role) {
+      alert("Please select a role first");
+      return;
+    }
 
-    // Fake signup
-    localStorage.setItem("user", JSON.stringify({ name, email }));
+    const userData = { name, email, role };
 
-    // Redirect
-    window.location.href = "/Trips";
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    router.push("/verify-nin");
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+    <>
+      {/* MODAL */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-6 w-[90%] max-w-md shadow-2xl">
+            <h2 className="text-xl font-semibold text-center mb-4">
+              Sign up as
+            </h2>
+
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => {
+                  setRole("driver");
+                  setShowModal(false);
+                }}
+                className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-medium transition"
+              >
+                Driver
+              </button>
+
+              <button
+                onClick={() => {
+                  setRole("passenger");
+                  setShowModal(false);
+                }}
+                className="bg-gray-100 hover:bg-gray-200 py-3 rounded-xl font-medium transition"
+              >
+                Passenger
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MAIN PAGE */}
+      <section className="min-h-screen flex flex-col lg:flex-row bg-gray-100">
         
-        {/* Header */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Create Account</h2>
-          <p className="text-gray-600 text-sm">
-            Start booking your trips in seconds
-          </p>
+        {/* LEFT IMAGE */}
+        <div className="hidden lg:block w-[50%]">
+          <Image
+            src="/aboutus.jpg"
+            alt="About"
+            width={600}
+            height={400}
+            className="h-full w-full object-cover"
+          />
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSignup} className="flex flex-col gap-4">
-          
-          <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-700">Full Name</label>
-            <input
-              type="text"
-              placeholder="John snow"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-600"
-              required
-            />
+        {/* RIGHT FORM */}
+        <div className="w-full lg:w-[50%] flex items-center justify-center p-6">
+          <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
+
+            {/* Header */}
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold text-gray-900">
+                Create Account
+              </h2>
+
+              <p className="text-gray-500 text-sm mt-1">
+                {role === "driver"
+                  ? "Create your driver account"
+                  : role === "passenger"
+                  ? "Start booking your trips"
+                  : "Choose a role to continue"}
+              </p>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSignup} className="flex flex-col gap-4">
+
+              {/* Google Button */}
+              <button
+                type="button"
+                className="flex items-center justify-center gap-3 border py-3 rounded-xl hover:bg-gray-900 hover:text-white transition font-medium"
+              >
+                <FcGoogle className="text-xl" />
+                Continue with Google
+              </button>
+
+              {/* Divider */}
+              <div className="flex items-center gap-2">
+                <div className="h-[1px] bg-gray-300 w-full" />
+                <span className="text-sm text-gray-400">OR</span>
+                <div className="h-[1px] bg-gray-300 w-full" />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="text-sm text-gray-600">Email</label>
+                <input
+                  type="email"
+                  placeholder="example@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full mt-1 border rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  required
+                />
+              </div>
+
+              {/* Password */}
+              <div>
+                <label className="text-sm text-gray-600">Password</label>
+                <input
+                  type="password"
+                  placeholder="********"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full mt-1 border rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  required
+                />
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition transform hover:scale-[1.02]"
+              >
+                Sign Up
+              </button>
+            </form>
+
+            {/* Footer */}
+            <p className="text-center text-sm text-gray-500 mt-6">
+              Already have an account?{" "}
+              <Link href="/login" className="text-blue-600 font-medium hover:underline">
+                Login
+              </Link>
+            </p>
           </div>
-
-          {/* Email */}
-          <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-700">Email</label>
-            <input
-              type="email"
-              placeholder="example@gmail.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-600"
-              required
-            />
-          </div>
-
-          {/* Password */}
-          <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-700">Password</label>
-            <input
-              type="password"
-              placeholder="********"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-600"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="bg-blue-600 text-white py-3 rounded-lg font-semibold hover:scale-[1.02] cursor-pointer transition"
-          >
-            Sign Up
-          </button>
-        </form>
-
-        {/* Footer */}
-        <p className="text-center text-sm text-gray-600 mt-6">
-          Already have an account?{" "}
-          <Link href="/login" className="text-blue-600 font-medium">
-            Login
-          </Link>
-        </p>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }

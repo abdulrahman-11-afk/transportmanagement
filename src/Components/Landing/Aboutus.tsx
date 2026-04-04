@@ -3,15 +3,15 @@ import Image from "next/image";
 export default function AboutUsSection() {
   return (
     <section id="about-us" className="py-24 px-6 bg-gray-50">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8">
 
-        <div className="w-full h lg:w-1/2">
+        <div className="w-full h md:w-1/2">
           <Image
             src="/aboutus.jpg" 
             alt="About Us"
             width={600}
             height={400}
-            className="rounded-3xl h-110 object-cover shadow-lg"
+            className="rounded-3xl h-105 object-cover shadow-lg"
           />
         </div>
 
