@@ -25,7 +25,7 @@ export default function LoginPage() {
     const parsedUser = JSON.parse(storedUser);
 
     if (parsedUser.email === email) {
-      router.push("/Trips");
+      router.push("/dashboard");
     } else {
       alert("Invalid email or password");
     }
