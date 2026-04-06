@@ -1,13 +1,12 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 type Bus = {
   id: number;
   from: string;
   to: string;
-  name: string;
   type: string;
   price: number;
   image: string;
@@ -18,7 +17,6 @@ const buses: Bus[] = [
     id: 1,
     from: "Ibadan",
     to: "Osogbo",
-    name: "ABC Transport",
     type: "Toyota Hiace",
     price: 5000,
     image: "/bus1.jpg",
@@ -27,7 +25,6 @@ const buses: Bus[] = [
     id: 2,
     from: "Ibadan",
     to: "Lagos",
-    name: "GUO Transport",
     type: "Toyota Coaster",
     price: 7000,
     image: "/bus2.jpg",
@@ -36,9 +33,9 @@ const buses: Bus[] = [
 
 const locations = ["Ibadan", "Lagos", "Abuja", "Ilorin", "Osogbo"];
 
-// ✅ Inner component that uses useSearchParams
 function TripsContent() {
   const params = useSearchParams();
+  const router = useRouter(); // ✅ moved INSIDE the component
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -125,13 +122,20 @@ function TripsContent() {
         ) : (
           results.map((bus) => (
             <div key={bus.id} className="bg-white rounded-xl shadow overflow-hidden">
-              <img src={bus.image} className="w-full h-40 object-cover" alt={bus.name} />
+              <img src={bus.image} className="w-full h-40 object-cover" alt={bus.type} />
               <div className="p-4">
-                <h3 className="font-semibold">{bus.name}</h3>
-                <p className="text-sm text-gray-500">{bus.from} → {bus.to}</p>
+                <p className="font-semibold">{bus.from} → {bus.to}</p>
                 <p className="text-sm">Type: {bus.type}</p>
                 <p className="text-blue-600 font-bold">₦{bus.price}</p>
-                <button className="bg-blue-600 text-white py-2 rounded-lg w-full mt-2">
+                <button
+                  onClick={() =>
+                    router.push(
+                      // ✅ using bus.type instead of bus.name since name was removed
+                      `/dashboard/trips/book?busName=${encodeURIComponent(bus.type)}&from=${bus.from}&to=${bus.to}&price=${bus.price}&date=${date}`
+                    )
+                  }
+                  className="bg-blue-600 text-white py-2 rounded-lg w-full mt-2"
+                >
                   Book Now
                 </button>
               </div>
@@ -144,7 +148,6 @@ function TripsContent() {
   );
 }
 
-// ✅ Outer page component wraps with Suspense
 export default function TripsPage() {
   return (
     <Suspense fallback={<div className="p-6 text-gray-500">Loading trips...</div>}>
