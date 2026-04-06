@@ -3,20 +3,21 @@ import Image from "next/image";
 export default function AboutUsSection() {
   return (
     <section id="about-us" className="py-24 px-6 bg-gray-50">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
 
-        <div className="w-full h md:w-1/2">
+        <div className="w-full flex justify-end md:w-1/2">
           <Image
             src="/aboutus.jpg" 
             alt="About Us"
             width={600}
             height={400}
-            className="rounded-3xl h-105 object-cover shadow-lg"
+            className="rounded-3xl w-130 h-105 object-cover shadow-lg"
           />
         </div>
 
         <div className="w-full lg:w-1/2 flex flex-col gap-4">
-          <div className="text-4xl sm:text-5xl font-bold text-gray-900">
+        <div className="flex flex-col gap-3 w-130">
+            <div className="text-4xl sm:text-5xl font-bold text-gray-900">
               About <span className="text-blue-600">us</span>
           </div>
           <h2 className="text-gray-700 text-lg max-w-xl">
@@ -49,6 +50,7 @@ export default function AboutUsSection() {
               <span className="text-gray-600 text-sm">Cancellation Fee</span>
             </div>
           </div>
+        </div>
         </div>
 
       </div>
