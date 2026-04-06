@@ -1,40 +1,47 @@
 "use client";
+
 import { IoLocationOutline } from "react-icons/io5";
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // ✅ IMPORT ADDED
 
 export default function DashboardPage() {
-    const [from, setFrom] = useState("");
-    const [to, setTo] = useState("");
-    const [date, setDate] = useState("");
-    const [passengers, setPassengers] = useState("");
-  
-    const locations = ["Ibadan", "Osogbo", "Lagos", "Abuja", "Ilorin"];
-  
-    const handleSearch = (e: React.FormEvent) => {
-      e.preventDefault();
-  
-      const isLoggedIn = localStorage.getItem("user");
-  
-      if (!isLoggedIn) {
-        localStorage.setItem(
-          "searchData",
-          JSON.stringify({ from, to, date, passengers })
-        );
-        window.location.href = "/login";
-        return;
-      }
-  
-      window.location.href = `/trips?from=${from}&to=${to}`;
-    };
-  
+  const router = useRouter(); // ✅ FIX
+
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [date, setDate] = useState("");
+  const [passengers, setPassengers] = useState("");
+
+  const locations = ["Ibadan", "Osogbo", "Lagos", "Abuja", "Ilorin"];
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const isLoggedIn = localStorage.getItem("user");
+
+    if (!isLoggedIn) {
+      localStorage.setItem(
+        "searchData",
+        JSON.stringify({ from, to, date, passengers })
+      );
+
+      router.push("/login"); // ✅ FIXED (no reload)
+      return;
+    }
+
+    // ✅ CORRECT REDIRECT TO TRIPS PAGE
+    router.push(
+      `/dashboard/trips?from=${from}&to=${to}&date=${date}&passengers=${passengers}`
+    );
+  };
+
   return (
     <div className="grid grid-cols-3 gap-4">
 
-     {/* SEARCH FORM */}
+      {/* SEARCH FORM */}
       <div className="bg-white col-span-2 rounded-2xl p-4 shadow-sm">
         <h3 className="font-semibold mb-3">Search Trips</h3>
 
-        {/* ✅ FIXED: added onSubmit */}
         <form onSubmit={handleSearch} className="flex flex-col gap-3">
 
           <div className="flex flex-col md:flex-row gap-4 items-end">
@@ -122,8 +129,7 @@ export default function DashboardPage() {
         </form>
       </div>
 
-      {/* RECENT BOOKINGS */}
-      <div className=" bg-white rounded-2xl p-4 shadow-sm">
+     <div className=" bg-white rounded-2xl p-4 shadow-sm">
         <h3 className="font-semibold mb-3">Recent Bookings</h3>
 
         <div className="flex flex-col gap-2 text-sm">
@@ -155,8 +161,9 @@ export default function DashboardPage() {
         <h3 className="text-sm text-gray-400">Total Bookings</h3>
         <p className="text-2xl font-bold mt-2">120</p>
       </div>
-
-
     </div>
   );
 }
+
+
+ 
