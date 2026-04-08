@@ -37,18 +37,15 @@ function BookingContent() {
   const [confirmed, setConfirmed] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Seat
   const [seats, setSeats] = useState<Seat[]>(generateSeats());
   const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
 
-  // Payment
   const [paymentMethod, setPaymentMethod] = useState<"card" | "transfer">("card");
   const [cardNumber, setCardNumber] = useState("");
   const [expiry, setExpiry] = useState("");
   const [cvv, setCvv] = useState("");
   const [cardName, setCardName] = useState("");
 
-  // Next of kin
   const [kinName, setKinName] = useState("");
   const [kinPhone, setKinPhone] = useState("");
   const [kinRelationship, setKinRelationship] = useState("");
@@ -151,9 +148,39 @@ function BookingContent() {
           .fade-up-2 { animation-delay: 0.25s; }
           .fade-up-3 { animation-delay: 0.35s; }
           .fade-up-4 { animation-delay: 0.45s; }
+
+          /* ── Print styles ── */
+          @media print {
+            /* Hide everything on the page */
+            body * {
+              visibility: hidden !important;
+            }
+            /* Show only the receipt and its children */
+            .print-receipt,
+            .print-receipt * {
+              visibility: visible !important;
+            }
+            /* Position the receipt to fill the page */
+            .print-receipt {
+              position: fixed !important;
+              top: 0 !important;
+              left: 0 !important;
+              width: 100% !important;
+              margin: 0 !important;
+              padding: 24px !important;
+              box-shadow: none !important;
+              border-radius: 0 !important;
+            }
+            /* Hide action buttons */
+            .print-hide {
+              display: none !important;
+            }
+          }
         `}</style>
+
         <div className="max-w-md text-center">
-          <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
+          {/* Add print-receipt class to the card only */}
+          <div className="print-receipt bg-white rounded-3xl shadow-lg overflow-hidden">
             <div className="bg-gradient-to-br from-blue-500 to-blue-700 p-8">
               <div className="pop-in text-6xl mb-3">🎉</div>
               <h2 className="fade-up text-white text-2xl font-bold">Booking Confirmed!</h2>
@@ -170,16 +197,17 @@ function BookingContent() {
                   <Row label="Amount Paid" value={<span className="text-green-600 font-bold">₦{Number(price).toLocaleString()}</span>} />
                 </div>
               </div>
-             
+
+              {/* Buttons hidden on print */}
               <button
                 onClick={() => router.push("/dashboard/trips")}
-                className="fade-up fade-up-3 w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
+                className="print-hide fade-up fade-up-3 w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
               >
                 Back to Trips
               </button>
               <button
                 onClick={() => window.print()}
-                className="fade-up fade-up-4 w-full border border-gray-200 text-gray-600 py-3 rounded-xl font-semibold hover:bg-gray-50 transition"
+                className="print-hide fade-up fade-up-4 w-full border border-gray-200 text-gray-600 py-3 rounded-xl font-semibold hover:bg-gray-50 transition"
               >
                 🖨️ Print Receipt
               </button>
@@ -219,7 +247,7 @@ function BookingContent() {
         .spinner { animation: spin 0.8s linear infinite; }
       `}</style>
 
-      <div className="max-w-lg  space-y-5">
+      <div className="max-w-lg space-y-5">
 
         {/* Step indicator */}
         <div className="flex items-center gap-2">
@@ -295,7 +323,6 @@ function BookingContent() {
                         </button>
                       );
                     }),
-                    // ✅ Fixed key prop — unique key for each aisle spacer
                     <div key={`aisle-${row}`} />,
                     ...[3, 4].map((col) => {
                       const seat = seats.find((s) => s.id === `${row}${col}`)!;
@@ -410,7 +437,6 @@ function BookingContent() {
                   </select>
                 </Field>
 
-                {/* Summary */}
                 <div className="bg-gray-50 rounded-2xl p-4 text-sm space-y-2 mt-2">
                   <p className="font-semibold text-gray-600 text-xs uppercase tracking-wide mb-2">Booking Summary</p>
                   <Row label="Seat" value={selectedSeat!} />
