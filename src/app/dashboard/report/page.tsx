@@ -45,7 +45,7 @@ export default function ReportsPage() {
   return (
     <>
       
-      <div className="rep space-y-6 max-w-2xl">
+      <div className="rep space-y-6 max-w-2xl text-black">
 
         {/* Header */}
         <div className="fu flex items-start justify-between flex-wrap gap-3">

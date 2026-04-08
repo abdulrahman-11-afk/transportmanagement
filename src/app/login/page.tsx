@@ -32,7 +32,7 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="min-h-screen flex flex-col lg:flex-row bg-gray-100">
+    <section className="min-h-screen flex flex-col lg:flex-row bg-gray-100 text-black">
 
       {/* LEFT IMAGE */}
       <div className="hidden lg:block w-[50%]">

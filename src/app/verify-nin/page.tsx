@@ -36,7 +36,7 @@ export default function VerifyNINPage() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+    <section className="min-h-screen flex items-center justify-center bg-gray-100 p-6 text-black">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
 
         {/* Header */}

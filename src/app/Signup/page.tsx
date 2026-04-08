@@ -35,8 +35,8 @@ export default function SignupPage() {
       {/* MODAL */}
       {showModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 w-[90%] max-w-md shadow-2xl">
-            <h2 className="text-xl font-semibold text-center mb-4">
+          <div className="bg-white rounded-2xl p-6 w-[90%] max-w-md shadow-2xl text-black">
+            <h2 className="text-xl font-semibold text-center mb-4 text-black">
               Sign up as
             </h2>
 
@@ -66,7 +66,7 @@ export default function SignupPage() {
       )}
 
       {/* MAIN PAGE */}
-      <section className="min-h-screen flex flex-col lg:flex-row bg-gray-100">
+      <section className="min-h-screen flex flex-col lg:flex-row bg-gray-100 text-black">
         
         {/* LEFT IMAGE */}
         <div className="hidden lg:block w-[50%]">

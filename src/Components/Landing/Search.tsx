@@ -43,7 +43,7 @@ export default function SearchForm() {
       {/* Form */}
       <form
         onSubmit={handleSearch}
-        className="bg-white rounded-2xl border border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-6 md:p-8 flex flex-col gap-6 w-full"
+        className="bg-white rounded-2xl border border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-6 md:p-8 flex flex-col gap-6 w-full text-black"
       >
         <div className="flex flex-col md:flex-row gap-4 items-end">
           

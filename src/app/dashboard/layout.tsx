@@ -97,7 +97,7 @@ export default function DashboardLayout({ children }: Props) {
         <div className="flex-1 flex flex-col gap-4">
 
           {/* NAVBAR */}
-          <div className="bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm">
+          <div className="bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm text-black">
             <div>
               <h2 className="font-semibold text-lg capitalize">
                 {pathname.split("/")[2] || "Dashboard"}

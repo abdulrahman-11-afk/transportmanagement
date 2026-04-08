@@ -495,7 +495,7 @@ function BookingContent() {
 
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
-    <div>
+    <div className="text-black">
       <label className="text-xs text-gray-500 mb-1 block font-medium">{label}</label>
       {children}
       {error && <p className="text-red-500 text-xs mt-1">{error}</p>}

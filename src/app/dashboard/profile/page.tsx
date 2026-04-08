@@ -56,7 +56,7 @@ export default function ProfilePage() {
         .pop { animation: popIn 0.35s cubic-bezier(.4,0,.2,1) both; }
       `}</style>
 
-      <div className="pro-page space-y-6 max-w-2xl">
+      <div className="pro-page space-y-6 max-w-2xl text-black">
 
         {saved && (
           <div className="pop fixed top-5 right-5 z-50 bg-emerald-500 text-white px-5 py-3 rounded-2xl shadow-lg text-sm font-semibold">

@@ -7,7 +7,7 @@ import Footer from '@/src/Components/Layout/footer';
 import Navbar from '@/src/Components/Layout/Navbar';
 export default function Home() {
   return (
-    <div className="min-h-screen bg-dark-500">
+    <div className="min-h-screen bg-dark-500 text-black">
        <Navbar />
             <main className='pt-30'>
               <HeroSection />

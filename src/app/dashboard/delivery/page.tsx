@@ -5,7 +5,7 @@ export default function DeliveryPage() {
     <>
      
 
-      <div className="del-page min-h-[70vh] flex items-center justify-center px-4">
+      <div className="del-page min-h-[70vh] flex items-center justify-center px-4 text-black">
         <div className="text-center max-w-md">
 
         

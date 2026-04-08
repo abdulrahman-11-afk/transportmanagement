@@ -51,7 +51,7 @@ export default function SettingsPage() {
     <>
      
 
-      <div className="set-page max-w-2xl space-y-6">
+      <div className="set-page max-w-2xl space-y-6 text-black">
 
         <div className="fu">
           <h1 className="set-title text-2xl font-extrabold text-gray-900">Settings</h1>

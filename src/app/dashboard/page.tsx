@@ -36,7 +36,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-4 text-black">
 
       {/* SEARCH FORM */}
       <div className="bg-white col-span-2 rounded-2xl p-4 shadow-sm">
