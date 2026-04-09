@@ -2,10 +2,10 @@
 
 import { IoLocationOutline } from "react-icons/io5";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // ✅ IMPORT ADDED
+import { useRouter } from "next/navigation"; 
 
 export default function DashboardPage() {
-  const router = useRouter(); // ✅ FIX
+  const router = useRouter(); 
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -25,11 +25,10 @@ export default function DashboardPage() {
         JSON.stringify({ from, to, date, passengers })
       );
 
-      router.push("/login"); // ✅ FIXED (no reload)
+      router.push("/login"); 
       return;
     }
 
-    // ✅ CORRECT REDIRECT TO TRIPS PAGE
     router.push(
       `/dashboard/trips?from=${from}&to=${to}&date=${date}&passengers=${passengers}`
     );

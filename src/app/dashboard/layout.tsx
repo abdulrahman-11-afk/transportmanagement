@@ -12,7 +12,6 @@ export default function DashboardLayout({ children }: Props) {
   const router = useRouter();
   const pathname = usePathname();
 
-  // ✅ Dynamic active class
   const linkClass = (path: string) =>
     `flex items-center gap-2 px-4 py-2 rounded-lg text-left transition ${
       pathname === path
@@ -24,10 +23,8 @@ export default function DashboardLayout({ children }: Props) {
     <div className="min-h-screen bg-[#f5f6fa] p-4">
       <div className="flex gap-4">
 
-        {/* SIDEBAR */}
         <aside className="w-64 h-[95vh] bg-white rounded-2xl p-4 shadow-sm flex flex-col">
 
-          {/* Logo */}
           <div className="flex items-center gap-2 mb-6">
             <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-lg font-bold">
               <Zap size={16} />
@@ -40,7 +37,6 @@ export default function DashboardLayout({ children }: Props) {
             </div>
           </div>
 
-          {/* Menu */}
           <nav className="flex flex-col gap-2 text-sm">
             <button
               onClick={() => router.push("/dashboard")}
@@ -78,7 +74,6 @@ export default function DashboardLayout({ children }: Props) {
             </button>
           </nav>
 
-          {/* Logout */}
           <div className="mt-auto">
             <button
               onClick={() => {
@@ -93,10 +88,9 @@ export default function DashboardLayout({ children }: Props) {
           </div>
         </aside>
 
-        {/* MAIN */}
+      
         <div className="flex-1 flex flex-col gap-4">
 
-          {/* NAVBAR */}
           <div className="bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm text-black">
             <div>
               <h2 className="font-semibold text-lg capitalize">
@@ -120,7 +114,7 @@ export default function DashboardLayout({ children }: Props) {
             </div>
           </div>
 
-          {/* CONTENT */}
+          
           {children}
         </div>
       </div>

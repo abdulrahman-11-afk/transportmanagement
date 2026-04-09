@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="bg-gradient-to-r from-[#073A48] to-[#38C5F4]  flex flex-col md:flex-row items-center justify-between  max-w-7xl mx-20 px-6 md:pl-10 md:pr-0 rounded-3xl scroll-mt-40 min-h-[450px] shadow-lg">
+    <section className="bg-gradient-to-r from-[#073A48] to-[#38C5F4]  flex flex-col md:flex-row items-center justify-between max-w-7xl md:mx-20 px-6 md:pl-10 md:pr-0 md:rounded-3xl scroll-mt-40 min-h-[450px] shadow-lg">
       <div className="flex flex-col text-center md:text-left">
-        <h1 className="text-white text-4xl md:text-5xl font-bold leading-tight">
+        <h1 className="text-white text-2xl md:text-5xl font-bold leading-tight">
           Book Your Next Trip in Seconds
         </h1>
 
-        <p className="text-white/90 mt-3">
+        <p className="text-white/90 text-sm mt-3">
           Book reliable buses and cars across states in minutes.
           <br /> Safe, fast, and affordable.
         </p>
