@@ -16,19 +16,19 @@ export default function SignupPage() {
   const router = useRouter();
 
   const handleSignup = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
+  if (!role) { alert("Please select a role first"); return; }
+  const userData = { name, email, role };
+  localStorage.setItem("user", JSON.stringify(userData));
 
-    if (!role) {
-      alert("Please select a role first");
-      return;
-    }
-
-    const userData = { name, email, role };
-
-    localStorage.setItem("user", JSON.stringify(userData));
-
+  if (role === "driver") {
+    router.push("/driver/complete-registration");
+  } else {
     router.push("/verify-nin");
-  };
+  }
+};
+
+ 
 
   return (
     <>
