@@ -11,7 +11,7 @@ export default function AboutUsSection() {
             alt="About Us"
             width={600}
             height={400}
-            className="rounded-3xl w-130 h-105 object-cover shadow-lg"
+            className="rounded-3xl w-130 h-105 object-cover loading-eager shadow-lg"
           />
         </div>
 

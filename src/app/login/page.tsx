@@ -6,28 +6,48 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+const API = "https://transport-management-server-remi.onrender.com";
+
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const router = useRouter();
 
-  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    const storedUser = localStorage.getItem("user");
+    try {
+      const res = await fetch(`${API}/api/passenger/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (!storedUser) {
-      alert("No account found. Please sign up.");
-      return;
-    }
+      const data = await res.json();
 
-    const parsedUser = JSON.parse(storedUser);
+      if (!res.ok) {
+        setError(data.message || "Login failed. Please check your credentials.");
+        return;
+      }
 
-    if (parsedUser.email === email) {
+      // Save token and user info
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
+
       router.push("/dashboard");
-    } else {
-      alert("Invalid email or password");
+    } catch (err) {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,20 +69,19 @@ export default function LoginPage() {
       <div className="w-full lg:w-[50%] flex items-center justify-center p-6">
         <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
 
-          {/* Header */}
           <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold text-gray-900">
-              Welcome Back
-            </h2>
-            <p className="text-gray-500 text-sm mt-1">
-              Login to continue your journey
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
+            <p className="text-gray-500 text-sm mt-1">Login to continue your journey</p>
           </div>
 
-          {/* Form */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
 
-            {/* Google Button */}
             <button
               type="button"
               className="flex items-center justify-center gap-3 border py-3 rounded-xl hover:bg-gray-900 hover:text-white transition font-medium"
@@ -71,14 +90,12 @@ export default function LoginPage() {
               Continue with Google
             </button>
 
-            {/* Divider */}
             <div className="flex items-center gap-2">
               <div className="h-[1px] bg-gray-300 w-full" />
               <span className="text-sm text-gray-400">OR</span>
               <div className="h-[1px] bg-gray-300 w-full" />
             </div>
 
-            {/* Email */}
             <div>
               <label className="text-sm text-gray-600">Email</label>
               <input
@@ -91,7 +108,6 @@ export default function LoginPage() {
               />
             </div>
 
-            {/* Password */}
             <div>
               <label className="text-sm text-gray-600">Password</label>
               <input
@@ -104,34 +120,28 @@ export default function LoginPage() {
               />
             </div>
 
-            {/* Extra Options */}
             <div className="flex justify-between items-center text-sm">
               <label className="flex items-center gap-2 text-gray-600">
                 <input type="checkbox" />
                 Remember me
               </label>
-
-              <button
-                type="button"
-                className="text-blue-600 hover:underline"
-              >
+              <button type="button" className="text-blue-600 hover:underline">
                 Forgot password?
               </button>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition transform hover:scale-[1.02]"
+              disabled={loading}
+              className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold transition transform hover:scale-[1.02]"
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
 
-          {/* Footer */}
           <p className="text-center text-sm text-gray-500 mt-6">
-            Don’t have an account?{" "}
-            <Link href="Signup" className="text-blue-600 font-medium hover:underline">
+            Don't have an account?{" "}
+            <Link href="/Signup" className="text-blue-600 font-medium hover:underline">
               Sign up
             </Link>
           </p>
