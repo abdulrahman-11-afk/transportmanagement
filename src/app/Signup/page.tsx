@@ -51,7 +51,6 @@ export default function SignupPage() {
         return;
       }
 
-      // Save token and user data, then redirect to email verification page
       const token = data.token;
       localStorage.setItem("verifyToken", token);
       localStorage.setItem("user", JSON.stringify({ name, email, role: "passenger" }));

@@ -35,7 +35,6 @@ export default function LoginPage() {
         return;
       }
 
-      // Save token and user info
       if (data.token) {
         localStorage.setItem("token", data.token);
       }

@@ -146,7 +146,7 @@ export default function VerifyEmailPage() {
             </div>
 
             <button
-              onClick={() => router.push("/dashboard")}
+              onClick={() => router.push("/verify-nin")}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition"
             >
               Go to Dashboard
