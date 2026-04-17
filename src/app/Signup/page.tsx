@@ -58,7 +58,7 @@ export default function SignupPage() {
 
       router.push("/verify-email");
     } catch (err) {
-      //setError("Network error. Please check your connection and try again.");
+      setError("Network error. Please check your connection and try again.");
     } finally {
       setLoading(false);
     }
