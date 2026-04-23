@@ -35,13 +35,12 @@ export default function SignupPage() {
       return;
     }
 
-    // Passenger registration
     setLoading(true);
     try {
       const response = await fetch(`${API}/api/passenger/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, role: "Passenger" }),
+        body: JSON.stringify({ name, email, password, role: "Passenger" }),
       });
 
       const data = await response.json();
@@ -65,7 +64,6 @@ export default function SignupPage() {
 
   return (
     <>
-      {/* ROLE SELECTION MODAL */}
       {showModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-[90%] max-w-md shadow-2xl text-black">
@@ -91,7 +89,6 @@ export default function SignupPage() {
       {/* MAIN PAGE */}
       <section className="min-h-screen flex flex-col lg:flex-row bg-gray-100 text-black">
 
-        {/* LEFT IMAGE */}
         <div className="hidden lg:block w-[50%]">
           <Image
             src="/aboutus.jpg"
@@ -112,8 +109,8 @@ export default function SignupPage() {
                 {role === "driver"
                   ? "Create your driver account"
                   : role === "passenger"
-                  ? "Start booking your trips"
-                  : "Choose a role to continue"}
+                    ? "Start booking your trips"
+                    : "Choose a role to continue"}
               </p>
             </div>
 
@@ -174,14 +171,14 @@ export default function SignupPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full mt-1 border rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                  required
+                  required={role === "passenger"}  // ← only required for passengers
                 />
               </div>
 
               <button
                 type="submit"
-                disabled={loading}
-                className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold transition transform hover:scale-[1.02]"
+                disabled={loading || !role}
+                className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold transition"
               >
                 {loading ? "Creating Account..." : "Sign Up"}
               </button>

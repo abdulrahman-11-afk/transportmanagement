@@ -27,10 +27,10 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <Link href="/login">
-            <button className="text-[13px] md:text-[16px] cursor-pointer">Log in</button>
+            <button className="text-[13px] md:flex hidden md:text-[16px] cursor-pointer">Log in</button>
           </Link>
           <Link href="/Signup">
-            <button className="px-4 h-8 md:h-10 text-[13px] md:text-[16px] cursor-pointer bg-blue-600 text-white rounded-md hover:scale-105 duration-300 transition">
+            <button className="px-4 h-8 md:h-10 md:flex items-center justify-center hidden text-[13px] md:text-[16px] cursor-pointer bg-blue-600 text-white rounded-md hover:scale-105 duration-300 transition">
               Sign Up
             </button>
           </Link>
@@ -38,7 +38,7 @@ export default function Navbar() {
             className="md:hidden flex items-center justify-center"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <Menu size={22} className="text-gray-700" />
+            <Menu size={28} className="text-gray-700  " />
           </button>
         </div>
       </div>
@@ -49,6 +49,14 @@ export default function Navbar() {
           <a href="#" className="hover:text-blue-600">Why Choose Us</a>
           <a href="#" className="hover:text-blue-600">About Us</a>
           <a href="#" className="hover:text-blue-600">Contact</a>
+           <Link href="/login">
+            <button className="hover:text-blue-600">Log in</button>
+          </Link>
+          <Link href="/Signup">
+            <button className="hover:text-blue-600">
+              Sign Up
+            </button>
+          </Link>
         </div>
       )}
     </header>

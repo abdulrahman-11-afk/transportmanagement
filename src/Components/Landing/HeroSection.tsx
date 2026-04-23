@@ -3,14 +3,14 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <div className="pt-10 md:pt-0">
-      <section className="bg-gradient-to-r from-[#073A48] to-[#38C5F4] flex flex-col md:flex-row items-center justify-center mx-10 md:mx-20  px-8 md:pl-10 md:pr-0 rounded-3xl min-h-[400px] md:min-h-[450px] shadow-lg py-10 md:py-0">
+      <section className="bg-gradient-to-r from-[#073A48] to-[#38C5F4] flex flex-col md:flex-row items-center justify-center mx-5 md:mx-20 md:mt-0 mt-[-40]  px-8 md:pl-10 md:pr-0 rounded-3xl min-h-[400px] md:min-h-[450px] shadow-lg py-10 md:py-0">
         <div className="flex flex-col text-center md:text-left">
           <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight">
             Book Your Next Trip in Seconds
           </h1>
           <p className="text-white/90 text-sm mt-3">
             Book reliable buses and cars across states in minutes.
-            <br /> Safe, fast, and affordable.
+            <br className="md:flex hidden"/> Safe, fast, and affordable.
           </p>
           <div className="flex items-center justify-center md:justify-start mt-5 gap-4">
             <a href="/Signup">

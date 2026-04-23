@@ -41,16 +41,16 @@ export default function DriverDashboardPage() {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
-        .drv { font-family: 'DM Sans', sans-serif; }
-        .drv-title { font-family: 'Syne', sans-serif; }
+      {/* <style>{`
+        // @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+        // .drv { font-family: 'DM Sans', sans-serif; }
+        // .drv-title { font-family: 'Syne', sans-serif; }
         @keyframes fadeUp { from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);} }
         .fu{animation:fadeUp 0.4s ease both;}
         .fu1{animation-delay:.05s;}.fu2{animation-delay:.1s;}.fu3{animation-delay:.18s;}.fu4{animation-delay:.26s;}
         @keyframes ping { 0%{transform:scale(1);opacity:1;}100%{transform:scale(2);opacity:0;} }
         .ping { animation: ping 1.5s cubic-bezier(0,0,.2,1) infinite; }
-      `}</style>
+      `}</style> */}
 
       <div className="drv min-h-screen bg-[#f5f6fa]">
 
@@ -87,19 +87,17 @@ export default function DriverDashboardPage() {
 
         <div className="max-w-4xl mx-auto p-6 space-y-6">
 
-          {/* Welcome + availability toggle */}
           <div className="fu flex items-center justify-between flex-wrap gap-4">
             <div>
-              <h1 className="drv-title text-2xl font-extrabold text-gray-900">
-                Welcome back, {driver.name?.split(" ")[0] || "Driver"} 👋
+              <h1 className="drv-title text-2xl font-semibold text-gray-900">
+                Welcome back, {driver.name?.split(" ")[0] || "Driver"} 
               </h1>
               <p className="text-gray-400 text-sm mt-0.5">Here's your driving overview</p>
             </div>
 
             <div className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-sm">
               <div className="relative">
-                {available && <span className="ping absolute inline-flex h-3 w-3 rounded-full bg-green-400 opacity-75 top-0 right-0" />}
-                <span className={`inline-flex h-3 w-3 rounded-full ${available ? "bg-green-500" : "bg-gray-300"}`} />
+                               <span className={`inline-flex h-3 w-3 rounded-full ${available ? "bg-green-500" : "bg-gray-300"}`} />
               </div>
               <span className="text-sm font-medium text-gray-700">{available ? "Available" : "Offline"}</span>
               <button
@@ -110,7 +108,6 @@ export default function DriverDashboardPage() {
             </div>
           </div>
 
-          {/* Vehicle card */}
           <div className="fu fu1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-5 text-white shadow-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -129,13 +126,12 @@ export default function DriverDashboardPage() {
             </div>
           </div>
 
-          {/* Stats */}
           <div className="fu fu2 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { label: "Total Trips",     value: recentTrips.length,          icon: <MapPin size={18} />,      color: "text-blue-600 bg-blue-50"    },
               { label: "Completed",       value: completedTrips,              icon: <Clock size={18} />,       color: "text-emerald-600 bg-emerald-50" },
               { label: "Total Earned",    value: `₦${(totalEarned/1000).toFixed(0)}k`, icon: <TrendingUp size={18} />, color: "text-amber-600 bg-amber-50" },
-              { label: "Driver Rating",   value: "4.8 ⭐",                    icon: <Star size={18} />,        color: "text-violet-600 bg-violet-50" },
+              { label: "Driver Rating",   value: "4.8 ",                    icon: <Star size={18} />,        color: "text-violet-600 bg-violet-50" },
             ].map((s) => (
               <div key={s.label} className="bg-white rounded-2xl p-4 shadow-sm">
                 <div className={`w-9 h-9 rounded-xl flex items-center justify-center mb-3 ${s.color}`}>
@@ -147,7 +143,6 @@ export default function DriverDashboardPage() {
             ))}
           </div>
 
-          {/* Recent trips */}
           <div className="fu fu3 bg-white rounded-2xl shadow-sm overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-50 flex items-center justify-between">
               <h3 className="drv-title font-bold text-gray-800">Recent Trips</h3>
@@ -175,7 +170,6 @@ export default function DriverDashboardPage() {
             </div>
           </div>
 
-          {/* Upcoming trip CTA */}
           <div className="fu fu4 bg-amber-50 border border-amber-200 rounded-2xl p-5 flex items-center justify-between gap-4">
             <div>
               <p className="font-bold text-amber-800">Upcoming Trip</p>

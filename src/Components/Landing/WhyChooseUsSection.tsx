@@ -88,11 +88,11 @@ export default function FeaturesSection() {
         </div>
 
 
-        <div className="mt-16 bg-white rounded-3xl p-8 mx-20 grid grid-cols-2 md:grid-cols-4 gap-2 border border-gray-200 shadow-sm">
+        <div className="mt-16 bg-white rounded-3xl p-8 mx-4 md:mx-20 grid grid-cols-2 md:grid-cols-4 gap-2 border border-gray-200 shadow-sm">
           {[
             { value: "99.2%", label: "On-time Arrival Rate", sub: "Across all routes" },
             { value: "24/7", label: "Customer Support", sub: "Always available" },
-            { value: "<2 min", label: "Booking Time", sub: "Average completion" },
+            { value: "2 min", label: "Booking Time", sub: "Average completion" },
             { value: "₦0", label: "Cancellation Fee", sub: "Up to 24hrs before" },
           ].map(({ value, label, sub }) => (
             <div key={label} className="text-center">

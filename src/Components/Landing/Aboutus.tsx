@@ -15,7 +15,7 @@ export default function AboutUsSection() {
           />
         </div>
 
-        <div className="w-full lg:w-1/2 flex flex-col gap-4">
+        <div className="w- lg:w-1/2 flex flex-col gap-4">
         <div className="flex flex-col gap-3 w-130">
             <div className="text-4xl sm:text-5xl font-bold text-gray-900">
               About <span className="text-blue-600">us</span>
